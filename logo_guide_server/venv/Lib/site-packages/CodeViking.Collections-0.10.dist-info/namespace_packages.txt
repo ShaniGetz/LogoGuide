@@ -1,0 +1,3 @@
+codeviking
+codeviking.collections
+codeviking.collections.dict

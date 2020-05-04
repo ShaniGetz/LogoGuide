@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title>Logo Guide</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+    <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body ng-app="LogoGuide" ng-cloak>
+<div class="main-container text-center" ng-controller="LogoGuideController">
+    <div class="logo">
+        <img width="250" src="assets/logo_logo_guide.png">
+        <!--        TODO: create a logo-->
+    </div>
+    <h5 class="quote">
+        <i>"The shape of your logo says a lot about your business."</i>
+    </h5>
+    <h5 class="explanation">
+        <!--        TODO: explanation text-->
+        Let our algorithm help you construct the perfect logo
+    </h5>
+    <form ng-submit="start($event)">
+        <div>
+            <div class="section">
+                <md-input-container class="input-container">
+                    <label>Tell us about your company:</label>
+                    <textarea ng-model="query.description" md-maxlength="800" rows="4" md-select-on-focus
+                              placeholder="ex. My company creates logos for small businesses."
+                              class="textarea"
+                    >
+                        </textarea>
+                </md-input-container>
+                <div>
+                    <md-button type="submit" class="md-raised md-primary go">
+                        {{goTitle}}
+                    </md-button>
+                </div>
+            </div>
+            <div class="results section" ng-show="status == 2">
+                <div class="answer" ng-class="{'show-in-delay': presentResults}">
+                    <h3 style="margin: 10px auto 25px; color: gray">
+                        Guidelines
+                    </h3>
+                    <p style="font-weight: 600; margin-bottom: 16px">
+                        {{answer}}
+                    </p>
+                    <p ng-repeat="line in formattedGuidelines" style="margin-bottom: 16px">
+                        <img width="22" style="margin-right: 12px; margin-top: -1px" src="{{line[0]}}">
+                        <span>{{line[1]}}</span>
+                    </p>
+                </div>
+            </div>
+            <div class="results" ng-show="status == 2">
+                <div class="section analysis" ng-class="{'show-in-delay': presentResults}">
+                    <h3 style="color: gray">
+                        Analysis
+                    </h3>
+                    <div class="section">
+                        <h5 class="results-title">
+                            Nearest Logos
+                        </h5>
+                        <ul class="neighbors-list section">
+                            <li ng-repeat="logo in formattedNN" class="nearest-logos">
+                                <div><img width="200" src="{{logo[2]}}"></div>
+                                <p class="company-name">{{logo[0]}}</p>
+                                <p>distance: {{logo[1]}}</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="section scroll" ng-show="na">
+                        <h5 class="results-title">
+                            Animal Composition
+                        </h5>
+                        <ul class="neighbors-list">
+                            <li ng-repeat="animal in formattedNA" class="nearest-logos nearest-animals">
+                                <div class="animal-img"><img width="{{200 * (animal[1] / 100)}}" src="{{animal[2]}}">
+                                </div>
+                                <p class="company-name">{{animal[0]}}</p>
+                                <p>weight: {{animal[1]}}%</p>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+
+<script type="text/javascript" src="app/app.js"></script>
+
+</body>
+</html>
